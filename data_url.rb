@@ -12,11 +12,9 @@ get '/' do
 end
 
 post '/ajax' do
-  imgstr =  params[:imgstr]
-  # imgstr.sub!(/.{22}/, '')
+  imgstr = params[:imgstr]
   puts "imgstr = #{imgstr[0..50]}"
 
-  # File.delete('new_icon.png')
   File.open('new_image.png', 'wb+') do |file|
     file.write(Base64.decode64(imgstr))
   end
