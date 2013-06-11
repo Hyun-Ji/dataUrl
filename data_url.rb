@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'sinatra'
-require  'sinatra-prawn'
+# require  'sinatra-prawn'
 require 'erb'
 require 'base64'
 
@@ -24,9 +24,9 @@ post '/ajax' do
 
 end
 
-get '/prawn' do
-  content_type 'application/pdf'
-  Prawn::Document.generate("hello.pdf") do
-    text "Hello World!"
-  end
-end
+# get '/prawn' do
+#   content_type 'application/pdf'
+#   Prawn::Document.generate("hello.pdf") do
+#     text "Hello World!"
+#   end
+# end
