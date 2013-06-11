@@ -1,32 +1,42 @@
-require 'rubygems'
+# require 'rubygems'
+# require "bundler/setup"
 require 'sinatra'
-# require  'sinatra-prawn'
+# require 'dberkom-sinatra-prawn'
+require 'sinatra/prawn'
 require 'erb'
 require 'base64'
+require 'pry'
 
-set :prawn, { :page_layout => :landscape }
+# set :prawn, { :page_layout => :landscape }
 
-get '/hello' do
-  "Hello"
-end
+class DataUrl < Sinatra::Base
+  helpers Sinatra::Prawn::Helpers
+  set :prawn, { :page_layout => :landscape }
 
-get '/' do
-  erb :index
-end
+  get '/hello' do
+    "Hello"
+  end
 
-post '/ajax' do
-  imgstr = params[:imgstr]
-  puts "imgstr = #{imgstr[0..50]}"
+  get '/' do
+    erb :index
+  end
 
-  File.open('new_image.png', 'wb+') do |file|
-    file.write(Base64.decode64(imgstr))
+  post '/ajax' do
+    imgstr = params[:imgstr]
+    puts "imgstr = #{imgstr[0..50]}"
+
+    File.open('canvas_image.png', 'wb+') do |file|
+      file.write(Base64.decode64(imgstr))
+    end
+    # could perhaps return filename here 
+    "success"
+  end
+
+  get '/prawn' do
+    # "Hello World"
+    content_type 'application/pdf'
+    #puts "Prawn dir = #{Prawn::DATADIR}"
+    prawn :pdf
   end
 
 end
-
-# get '/prawn' do
-#   content_type 'application/pdf'
-#   Prawn::Document.generate("hello.pdf") do
-#     text "Hello World!"
-#   end
-# end

@@ -36,7 +36,8 @@ $( document ).ready(function() {
 
       $.post('/ajax', { imgstr: strDataURI })
       .done( function(data) {
-          console.log('done');
+          console.log('done: ' + data);
+          $('a.invisible')[0].click();
       });
    });
 });
