@@ -32,7 +32,8 @@ class DataUrl < Sinatra::Base
     "success"
   end
 
-  get '/prawn' do
+  get '/prawn/?:id?' do
+    puts "id = #{params[:id]}"
     # "Hello World"
     content_type 'application/pdf'
     #puts "Prawn dir = #{Prawn::DATADIR}"

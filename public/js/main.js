@@ -37,7 +37,10 @@ $( document ).ready(function() {
       $.post('/ajax', { imgstr: strDataURI })
       .done( function(data) {
           console.log('done: ' + data);
-          $('a.invisible')[0].click();
+
+          $link = $('a.invisible');
+          $link.attr("href", '/prawn/' + data);
+          $link[0].click();
       });
    });
 });
